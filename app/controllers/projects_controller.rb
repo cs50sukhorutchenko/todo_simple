@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def delete #delete specified project
+  def delete #delete specified project!!!!
     @project = Project.find(params[:id]).destroy
     
     redirect_to project_path
