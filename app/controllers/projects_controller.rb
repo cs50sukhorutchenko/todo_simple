@@ -10,16 +10,26 @@ class ProjectsController < ApplicationController
   end
 
   def create #create new projict with params
-    @project = Article.new(project_params)
+    @project = Project.new(project_params)
 
     @project.save
     rediredt_to @project
   end
 
   def update #update specified project
+    @project = Project.fing(params[:id])
+
+    if @project.update(project_params)
+      redirect_to @project
+    else
+      render 'edit'
+    end
   end
 
   def delete #delete specified project
+    @project = Project.find(params[:id]).destroy
+    
+    redirect_to project_path
   end
   
 end
