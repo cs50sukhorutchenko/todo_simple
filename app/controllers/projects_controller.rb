@@ -1,25 +1,38 @@
 class ProjectsController < ApplicationController
   
-  def index #list of projects with tasks
+  def index 
     render json: Project.all
   end
 
-  def show #specified projiec by id
-    # byebug
+  def show 
     render json: Project.find(params[:id])
   end
 
-  def create #create new projict with params
-    @project = Article.new(project_params)
+  def create 
+   
+    project = Project.new(project_params)
 
-    @project.save
-    rediredt_to @project
+    if project.save
+      render json: project
+    else
+      render 'new'
+    end
   end
 
-  def update #update specified project
+  def update 
+    project = Project.fing(params[:id])
+
+    if project.update(project_params)
+      render json: project
+    else
+      render 'edit'
+    end
   end
 
-  def delete #delete specified project
+  def delete 
+    project = Project.find(params[:id]).destroy
+    
+    redirect_to project_path
   end
   
 end
