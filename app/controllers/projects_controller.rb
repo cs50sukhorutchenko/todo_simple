@@ -10,24 +10,28 @@ class ProjectsController < ApplicationController
   end
 
   def create #create new projict with params
-    @project = Project.new(project_params)
+   
+    render json: project = Project.new(project_params)
 
-    @project.save
-    rediredt_to @project
+    if project.save
+      render json: project
+    else
+      render json: 'new'
+    end
   end
 
   def update #update specified project
-    @project = Project.fing(params[:id])
+    render json: project = Project.fing(params[:id])
 
-    if @project.update(project_params)
-      redirect_to @project
+    if project.update(project_params)
+      render json: project
     else
-      render 'edit'
+      render json: 'edit'
     end
   end
 
   def delete #delete specified project!!!!
-    @project = Project.find(params[:id]).destroy
+    project = Project.find(params[:id]).destroy
     
     redirect_to project_path
   end
